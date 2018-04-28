@@ -371,8 +371,8 @@
 		03B752291B741AFD00FD3FDB /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		03B752411B74814B00FD3FDB /* RichXMLParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RichXMLParserTests.m; sourceTree = "<group>"; };
 		03EFD56F1B720AB0007EF284 /* ExportTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportTests.m; sourceTree = "<group>"; };
-		1CF081CD87E34BA6E9700986 /* Pods-Vienna.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"; sourceTree = "<group>"; };
 		03F33D951DF2A2F900B04FAF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1CF081CD87E34BA6E9700986 /* Pods-Vienna.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vienna.development.xcconfig"; path = "Pods/Target Support Files/Pods-Vienna/Pods-Vienna.development.xcconfig"; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
 		2FAA363F2072F50B00169C8A /* MMTabBarView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MMTabBarView.framework; path = External/MMTabBarView.framework; sourceTree = "<group>"; };
 		34363AC70C11C297002A1238 /* ClickableProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ClickableProgressIndicator.h; sourceTree = "<group>"; };
@@ -387,6 +387,7 @@
 		3A6760101E65FA4F0078CB14 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A7BD0DB1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BJRVerticallyCenteredTextFieldCell.h; sourceTree = "<group>"; };
 		3A7BD0DC1989AC7700E9444B /* BJRVerticallyCenteredTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BJRVerticallyCenteredTextFieldCell.m; sourceTree = "<group>"; };
+		3AA543C020963FD3000F1C99 /* CS-ID.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "CS-ID.xcconfig"; path = "Scripts/Resources/CS-ID.xcconfig"; sourceTree = "<group>"; };
 		3AEE7DE81695FC570018A17D /* vienna_public_key.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vienna_public_key.pem; sourceTree = "<group>"; };
 		3AF896C51CD8FDB800A9FA22 /* AppController+Sparkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Sparkle.h"; sourceTree = "<group>"; };
 		3AF896C61CD8FDB800A9FA22 /* AppController+Sparkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Sparkle.m"; sourceTree = "<group>"; };
@@ -1171,12 +1172,21 @@
 				F6A7DDCB1E470E980017BE5E /* Vienna Help */,
 				035B703619E0E4AE00197334 /* Vienna Tests */,
 				F63B7D701F1CD001002F71BF /* External */,
+				3AA543BF20963F9B000F1C99 /* Deployment Config */,
 				439824171666B31700FFE219 /* Scripts */,
 				7F60B6D7AEFB47009A82F8BA /* Frameworks */,
 				946A341AA82976C365B67A76 /* Pods */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
 			name = Vienna;
+			sourceTree = "<group>";
+		};
+		3AA543BF20963F9B000F1C99 /* Deployment Config */ = {
+			isa = PBXGroup;
+			children = (
+				3AA543C020963FD3000F1C99 /* CS-ID.xcconfig */,
+			);
+			name = "Deployment Config";
 			sourceTree = "<group>";
 		};
 		43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */ = {
@@ -2043,7 +2053,7 @@
 			);
 			name = "Make ID Template";
 			outputPaths = (
-				"$(SRCROOT)/configs/CS-ID.xcconfig",
+				"$(SRCROOT)/Scripts/Resources/CS-ID.xcconfig",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3220,6 +3230,7 @@
 		};
 		430C4AF81661F0860079C9FC /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AA543C020963FD3000F1C99 /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Code Sign ID";
 			};
@@ -3227,6 +3238,7 @@
 		};
 		430C4AF91661F0860079C9FC /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AA543C020963FD3000F1C99 /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Code Sign ID";
 			};
@@ -3426,6 +3438,7 @@
 		};
 		EAAF335A14BDE402002A8837 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AA543C020963FD3000F1C99 /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
@@ -3433,6 +3446,7 @@
 		};
 		EAAF335B14BDE402002A8837 /* Deployment */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3AA543C020963FD3000F1C99 /* CS-ID.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "Archive and Prep for Upload";
 			};
