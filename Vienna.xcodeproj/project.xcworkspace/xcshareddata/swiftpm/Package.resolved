@@ -12,10 +12,10 @@
       },
       {
         "package": "MMTabBarView",
-        "repositoryURL": "https://github.com/Eitot/MMTabBarView",
+        "repositoryURL": "https://github.com/ViennaRSS/MMTabBarView",
         "state": {
-          "branch": "spm",
-          "revision": "881557335249d2dd4b76d5591ecbdbe5008e81ac",
+          "branch": "v/1.4.10",
+          "revision": "5af818fe7769c595e41c6fb28c1c945454c97ecb",
           "version": null
         }
       },

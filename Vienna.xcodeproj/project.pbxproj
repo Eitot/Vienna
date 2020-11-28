@@ -162,7 +162,7 @@
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
-		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
+		2FE1D0092572B53500BFE5E8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = 2FE1D0082572B53500BFE5E8 /* MMTabBarView */; };
 		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
 		F69AE79A1F2215D600342640 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F69AE79C1F2215D600342640 /* InfoPlist.strings */; };
@@ -921,7 +921,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */,
-				F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */,
+				2FE1D0092572B53500BFE5E8 /* MMTabBarView in Frameworks */,
 				F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1528,7 +1528,7 @@
 			name = Vienna;
 			packageProductDependencies = (
 				F6B7BC3524A2A9A40051D76F /* FMDB */,
-				F69255992572A32900D387D8 /* MMTabBarView */,
+				2FE1D0082572B53500BFE5E8 /* MMTabBarView */,
 				F696D23D2561F9FC003DF0C0 /* Sparkle */,
 			);
 			productInstallPath = "$(HOME)/Applications";
@@ -1608,7 +1608,7 @@
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* Vienna */;
 			packageReferences = (
 				F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */,
-				F69255982572A32900D387D8 /* XCRemoteSwiftPackageReference "MMTabBarView" */,
+				2FE1D0072572B53500BFE5E8 /* XCRemoteSwiftPackageReference "MMTabBarView" */,
 				F696D23C2561F9FC003DF0C0 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
@@ -3083,11 +3083,11 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F69255982572A32900D387D8 /* XCRemoteSwiftPackageReference "MMTabBarView" */ = {
+		2FE1D0072572B53500BFE5E8 /* XCRemoteSwiftPackageReference "MMTabBarView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Eitot/MMTabBarView";
+			repositoryURL = "https://github.com/ViennaRSS/MMTabBarView";
 			requirement = {
-				branch = spm;
+				branch = v/1.4.10;
 				kind = branch;
 			};
 		};
@@ -3110,9 +3110,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F69255992572A32900D387D8 /* MMTabBarView */ = {
+		2FE1D0082572B53500BFE5E8 /* MMTabBarView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F69255982572A32900D387D8 /* XCRemoteSwiftPackageReference "MMTabBarView" */;
+			package = 2FE1D0072572B53500BFE5E8 /* XCRemoteSwiftPackageReference "MMTabBarView" */;
 			productName = MMTabBarView;
 		};
 		F696D23D2561F9FC003DF0C0 /* Sparkle */ = {
