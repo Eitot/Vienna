@@ -1015,20 +1015,12 @@
 		else if (folder.unreadCount)
 		{
 			[realCell setCount:folder.unreadCount];
-            if (@available(macOS 10.14, *)) {
-                realCell.backgroundColor = NSColor.controlAccentColor;
-            } else {
-                realCell.backgroundColor = [NSColor colorForControlTint:NSColor.currentControlTint];
-            }
+			realCell.backgroundColor = NSColor.controlBackgroundColor;
 		}
 		else if (folder.childUnreadCount && ![olv isItemExpanded:item])
 		{
 			[realCell setCount:folder.childUnreadCount];
-            if (@available(macOS 10.14, *)) {
-                realCell.backgroundColor = NSColor.controlAccentColor;
-            } else {
-                realCell.backgroundColor = [NSColor colorForControlTint:NSColor.currentControlTint];
-            }
+			realCell.backgroundColor = NSColor.controlBackgroundColor;
 		}
 		else
 		{
