@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "MMTabBarView",
+        "repositoryURL": "https://github.com/Eitot/MMTabBarView",
+        "state": {
+          "branch": "spm",
+          "revision": "881557335249d2dd4b76d5591ecbdbe5008e81ac",
+          "version": null
+        }
+      },
+      {
         "package": "Sparkle",
         "repositoryURL": "https://github.com/sparkle-project/Sparkle",
         "state": {
