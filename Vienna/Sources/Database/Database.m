@@ -1491,11 +1491,16 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     NSDate *currentDate = [NSDate date];
 
-    // We set the publication date ourselves if it is not contained in the feed, and only once when the article is created
-    NSDate *publicationDate = article.publicationDate ? article.publicationDate : currentDate;
-    article.publicationDate = publicationDate;
-
     NSDate * lastUpdate = article.lastUpdate ? article.lastUpdate : currentDate;
+
+    // We set the publication date ourselves if it is not contained in the feed, and only once when the article is created
+    // use the given publication date or the earliest date available
+    NSDate *publicationDate = article.publicationDate
+                                ? article.publicationDate
+                                : (lastUpdate && [lastUpdate isLessThan:currentDate]
+                                   ? lastUpdate 
+                                   : currentDate);
+    article.publicationDate = publicationDate;
 
     // Set some defaults
     if (userName == nil) {
@@ -1572,7 +1577,13 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     //keep last update date the same if not set in the current version of the article
     NSDate * lastUpdate = article.lastUpdate ? article.lastUpdate : existingArticle.lastUpdate;
-    //we do not update the publication date ever after inserting the article into the DB
+    //we do not make the publication date newer
+    NSDate * publicationDate = article.publicationDate && [article.publicationDate isLessThan:existingArticle.publicationDate]
+                                ? article.publicationDate
+                                : (article.lastUpdate && [article.lastUpdate isLessThan:existingArticle.publicationDate] 
+                                   ? article.lastUpdate
+                                   : existingArticle.publicationDate);
+    article.publicationDate = publicationDate;
 
     // Set some defaults
     if (userName == nil) {
@@ -1586,6 +1597,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     // Dates are stored as time intervals
     NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
+    NSTimeInterval publicationIntervalSince1970 = publicationDate.timeIntervalSince1970;
 
     // The article is revised if either the title or the body has changed.
 
@@ -1619,12 +1631,13 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
-            success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, "
+            success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, createddate=?, "
              @"read_flag=0, title=?, text=?, revised_flag=? WHERE folder_id=? AND message_id=?",
              @(parentId),
              userName,
              articleLink,
              @(lastUpdateIntervalSince1970),
+             @(publicationIntervalSince1970),
              articleTitle,
              articleBody,
              @(revised_flag),
