@@ -572,14 +572,6 @@
 	return NSNotFound;
 }
 
-/* hasCharacter
- * Returns YES if the specified character appears in the string. NO otherwise.
- */
--(BOOL)vna_hasCharacter:(char)ch
-{
-	return [self vna_indexOfCharacterInString:ch afterIndex:0] != NSNotFound;
-}
-
 /* trim
  * Removes leading and trailing whitespace from the string.
  */
@@ -694,12 +686,6 @@
     NSData * data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSString * ret = [data base64EncodedStringWithOptions:0];
     return ret;
-}
-
-+ (NSString *)vna_fromBase64String:(NSString *)string {
-    NSData * base64Data = [[NSData alloc] initWithBase64EncodedString:string options:0];
-    NSString * decryptedStr = [[NSString alloc] initWithData:base64Data encoding:NSUTF8StringEncoding];
-    return decryptedStr;
 }
 
 @end

@@ -39,7 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)vna_mapEntityToString:(NSString *)entityString;
 + (NSString *)vna_stringByConvertingHTMLEntities:(NSString *)stringToProcess;
 + (nullable NSString *)vna_toBase64String:(nullable NSString *)stringToProcess;
-+ (nullable NSString *)vna_fromBase64String:(nullable NSString *)stringToProcess;
 + (NSString *)vna_stringByCleaningURLString:(nullable NSString *)urlString;
 @property (readonly, nonatomic) NSString *vna_firstNonBlankLine;
 @property (readonly, nonatomic) NSString *vna_summaryTextFromHTML;
@@ -47,7 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSUInteger)vna_indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex;
 @property (readonly, nonatomic) NSString *vna_stringByEscapingExtendedCharacters;
 @property (readonly, nonatomic) NSString *vna_stringByUnescapingExtendedCharacters;
-- (BOOL)vna_hasCharacter:(char)ch;
 @property (readonly, nonatomic) NSString *vna_convertStringToValidPath;
 - (NSComparisonResult)vna_caseInsensitiveNumericCompare:(NSString *)string;
 @property (readonly, nonatomic) NSString *vna_normalised;
