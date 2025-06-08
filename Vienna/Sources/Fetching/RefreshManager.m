@@ -508,8 +508,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                       forHTTPHeaderField:@"Accept"];
         // if authentication infos are present, try basic authentication first
         if (![folder.username isEqualToString:@""]) {
-            NSString* usernameAndPassword = [NSString vna_toBase64String:[NSString stringWithFormat:@"%@:%@", folder.username, folder.password]];
-			[myRequest setValue:[NSString stringWithFormat:@"Basic %@", usernameAndPassword] forHTTPHeaderField:@"Authorization"];
+            NSString *credentials = [NSString stringWithFormat:@"%@:%@", folder.username, folder.password];
+            NSData *credentialsData = [credentials dataUsingEncoding:NSUTF8StringEncoding];
+            NSString *encodedCredentials = [credentialsData base64EncodedStringWithOptions:0];
+            [myRequest setValue:[NSString stringWithFormat:@"Basic %@", encodedCredentials] forHTTPHeaderField:@"Authorization"];
 		}
 
 

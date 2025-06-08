@@ -186,31 +186,6 @@
 
 @implementation NSString (StringExtensions)
 
-/* hexValue
- * A counterpart to integerValue, but parses a hexadecimal number.
- */
--(NSInteger)vna_hexValue
-{
-	NSInteger count = self.length;
-	NSInteger intValue = 0;
-	NSInteger index = 0;
-
-	while (index < count) {
-		unichar ch = [self characterAtIndex:index];
-		if (ch >= '0' && ch <= '9') {
-			intValue = (intValue * 16) + (ch - '0');
-		} else if (ch >= 'A' && ch <= 'F') {
-			intValue = (intValue * 16) + (ch - 'A' + 10);
-		} else if (ch >= 'a' && ch <= 'f') {
-			intValue = (intValue * 16) + (ch - 'a' + 10);
-		} else {
-			break;
-		}
-		++index;
-	}
-	return intValue;
-}
-
 /* summaryTextFromHTML
  * Create a summary text string from raw HTML. We strip out the HTML and convert the entity
  * characters to their unicode equivalents. Newlines are replaced with spaces then the string
@@ -218,7 +193,29 @@
  */
 -(NSString *)vna_summaryTextFromHTML
 {
-	return [NSString vna_stringByRemovingHTML:self].vna_normalised;
+    NSMutableString *string = [[NSString vna_stringByRemovingHTML:self] mutableCopy];
+    // Normalize the string; newlines are removed and replaced with spaces and
+    // multiple spaces are collapsed to one.
+    BOOL isInWhitespace = YES;
+    NSUInteger length = string.length;
+    NSUInteger index = 0;
+    while (index < length) {
+        unichar ch = [string characterAtIndex:index];
+        if (ch == '\r' || ch == '\n' || ch == '\t') {
+            if (!isInWhitespace) {
+                [string replaceCharactersInRange:NSMakeRange(index, 1) withString:@" "];
+            }
+            ch = ' ';
+        }
+        if (ch == ' ' && isInWhitespace) {
+            [string deleteCharactersInRange:NSMakeRange(index, 1)];
+            --index;
+            --length;
+        }
+        isInWhitespace = (ch == ' ');
+        ++index;
+    }
+    return string;
 }
 
 /* titleTextFromHTML
@@ -307,36 +304,6 @@
 
     return aString.vna_stringByUnescapingExtendedCharacters;
 } // stringByRemovingHTML
-
-/* normalised
- * Returns the current string normalised. Newlines are removed and replaced with spaces and multiple
- * spaces are collapsed to one.
- */
--(NSString *)vna_normalised
-{
-	NSMutableString * string = [NSMutableString stringWithString:self];
-	BOOL isInWhitespace = YES;
-	NSInteger length = string.length;
-	NSInteger index = 0;
-	
-	while (index < length) {
-		unichar ch = [string characterAtIndex:index];
-		if (ch == '\r' || ch == '\n' || ch == '\t') {
-			if (!isInWhitespace) {
-				[string replaceCharactersInRange:NSMakeRange(index, 1) withString:@" "];
-			}
-			ch = ' ';
-		}
-		if (ch == ' ' && isInWhitespace) {
-			[string deleteCharactersInRange:NSMakeRange(index, 1)];
-			--index;
-			--length;
-		}
-		isInWhitespace = (ch == ' ');
-		++index;
-	}
-	return string;
-}
 
 /* firstNonBlankLine
  * Returns the first line of the string that isn't entirely spaces or tabs. If all lines in the string are
@@ -540,9 +507,24 @@
 	
 	// Parse off numeric codes of the format #xxx
 	if (entityString.length > 1 && [entityString characterAtIndex:0] == '#') {
-		NSInteger intValue;
+		NSInteger intValue = 0;
+		// Parse hexadecimal number
 		if ([entityString characterAtIndex:1] == 'x') {
-			intValue = [entityString substringFromIndex:2].vna_hexValue;
+			NSUInteger index = 0;
+			NSUInteger count = [entityString substringFromIndex:2].length;
+			while (index < count) {
+				unichar ch = [entityString characterAtIndex:index];
+				if (ch >= '0' && ch <= '9') {
+					intValue = (intValue * 16) + (ch - '0');
+				} else if (ch >= 'A' && ch <= 'F') {
+					intValue = (intValue * 16) + (ch - 'A' + 10);
+				} else if (ch >= 'a' && ch <= 'f') {
+					intValue = (intValue * 16) + (ch - 'a' + 10);
+				} else {
+					break;
+				}
+				++index;
+			}
 		} else {
 			intValue = [entityString substringFromIndex:1].integerValue;
 		}
@@ -680,12 +662,6 @@
         }
     }
     return newString;
-}
-
-+ (NSString *)vna_toBase64String:(NSString *)string {
-    NSData * data = [string dataUsingEncoding:NSUTF8StringEncoding];
-    NSString * ret = [data base64EncodedStringWithOptions:0];
-    return ret;
 }
 
 @end

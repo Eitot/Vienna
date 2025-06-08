@@ -38,7 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)vna_stringByRemovingHTML:(NSString *)theString;
 + (NSString *)vna_mapEntityToString:(NSString *)entityString;
 + (NSString *)vna_stringByConvertingHTMLEntities:(NSString *)stringToProcess;
-+ (nullable NSString *)vna_toBase64String:(nullable NSString *)stringToProcess;
 + (NSString *)vna_stringByCleaningURLString:(nullable NSString *)urlString;
 @property (readonly, nonatomic) NSString *vna_firstNonBlankLine;
 @property (readonly, nonatomic) NSString *vna_summaryTextFromHTML;
@@ -48,11 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) NSString *vna_stringByUnescapingExtendedCharacters;
 @property (readonly, nonatomic) NSString *vna_convertStringToValidPath;
 - (NSComparisonResult)vna_caseInsensitiveNumericCompare:(NSString *)string;
-@property (readonly, nonatomic) NSString *vna_normalised;
 @property (readonly, nonatomic) NSString *vna_baseURL;
 @property (readonly, nonatomic) NSString *vna_host;
 @property (readonly, nonatomic) NSString *vna_trimmed;
-@property (readonly, nonatomic) NSInteger vna_hexValue;
 @property (readonly, nonatomic) BOOL vna_isBlank;
 
 @end
