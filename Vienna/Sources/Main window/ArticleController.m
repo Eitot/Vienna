@@ -72,7 +72,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     dispatch_queue_t queue;
 }
 
-@synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
+@synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers;
 
 /* init
  * Initialise.
@@ -316,19 +316,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	}
 	prefs.articleSortDescriptors = descriptors;
 	[mainArticleView refreshFolder:VNARefreshSortAndRedraw];
-}
-
-/* sortIsAscending
- * Returns YES if the sort direction is currently set to ascending.
- */
--(BOOL)sortIsAscending
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:prefs.articleSortDescriptors];
-	NSSortDescriptor * sortDescriptor = descriptors[0];
-	BOOL ascending = sortDescriptor.ascending;
-	
-	return ascending;
 }
 
 /* sortAscending
@@ -1432,8 +1419,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         }
         return YES;
     } else if (action == @selector(changeSortDirection:)) {
+        Preferences *preferences = Preferences.standardPreferences;
+        NSSortDescriptor *sortDescriptor = preferences.articleSortDescriptors.firstObject;
         NSNumber *sortAscending = menuItem.representedObject;
-        if (sortAscending.boolValue == self.sortIsAscending) {
+        if (sortDescriptor && sortAscending.boolValue == sortDescriptor.ascending) {
             menuItem.state = NSControlStateValueOn;
         } else {
             menuItem.state = NSControlStateValueOff;
@@ -1508,7 +1497,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     SEL action = item.action;
     if (action == @selector(goBack:)) {
         return self.canGoBack;
-    } else if (item.action == @selector(delete:)) {
+    } else if (action == @selector(delete:)) {
         Database *database = Database.sharedManager;
         Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
         return folder.type != VNAFolderTypeOpenReader && self.selectedArticle && !database.readOnly;
