@@ -64,7 +64,7 @@ class WebKitArticleConverter: ArticleConverter {
 
         let templateUrl = targetDirectory.appendingPathComponent("template.html")
         if FileManager.default.fileExists(atPath: templateUrl.path) {
-            self.htmlTemplate = (try? String(contentsOf: templateUrl)) ?? ""
+            htmlTemplate = (try? String(contentsOf: templateUrl, encoding: .utf8)) ?? ""
         }
         let cssUrl = targetDirectory.appendingPathComponent("stylesheet.css")
         self.cssStylesheet = FileManager.default.fileExists(atPath: cssUrl.path) ? cssUrl.absoluteString : ""
