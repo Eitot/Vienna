@@ -539,7 +539,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 // failure callback
 -(void)folderRefreshFailed:(NSMutableURLRequest *)request error:(NSError *)error
 {
-    os_log_debug(VNA_LOG, "Refresh of %@ failed. Reason: %{public}@", error.userInfo[NSURLErrorFailingURLStringErrorKey], error.localizedDescription);
+    os_log_debug(VNA_LOG, "Refresh of %@ failed. Reason: %{public}@", error.userInfo[NSURLErrorFailingURLErrorKey], error.localizedDescription);
     Folder * folder = ((NSDictionary *)[request vna_userInfo])[@"folder"];
     if (error.code == NSURLErrorCancelled) {
         // Stopping the connection isn't an error, so clear any existing error flag.
